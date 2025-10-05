@@ -1,0 +1,46 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "app_model",
+            "request": "launch", //"flutterMode": "release","flutterMode": "profile",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "APP_VERSION=1.0.0",
+                "--dart-define",
+                "BUILD_NUMBER=1",
+                "--dart-define",
+                "DEBUG_MODE=true",
+                "--dart-define",
+                "BACKEND_URL=http://localhost:8000",
+                // Light mode
+                "--dart-define",
+                "PRIMARY_COLOR_LIGHT=#02ee98",
+                "--dart-define",
+                "COMPLEMENTARY_COLOR_LIGHT=#ee0259",
+                "--dart-define",
+                "ANALOGOUS_1_COLOR_LIGHT=#02ee21",
+                "--dart-define",
+                "ANALOGOUS_2_COLOR_LIGHT=#02cfee",
+                "--dart-define",
+                "TRIADIC_1_COLOR_LIGHT=#0259ee",
+                "--dart-define",
+                "TRIADIC_2_COLOR_LIGHT=#9702ee",
+                // Dark mode
+                "--dart-define",
+                "PRIMARY_COLOR_DARK=#02bb7c",
+                "--dart-define",
+                "COMPLEMENTARY_COLOR_DARK=#bb024a",
+                "--dart-define",
+                "ANALOGOUS_1_COLOR_DARK=#02bb1a",
+                "--dart-define",
+                "ANALOGOUS_2_COLOR_DARK=#02a3bb",
+                "--dart-define",
+                "TRIADIC_1_COLOR_DARK=#024abb",
+                "--dart-define",
+                "TRIADIC_2_COLOR_DARK=#7902bb"
+            ]
+        }
+    ]
+}
