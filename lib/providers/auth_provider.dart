@@ -38,8 +38,8 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
       final authRepository = AuthRepository();
 
       final token = await authRepository.login(
-        kDebugMode ? "jvcs.mecatronica@gmail.com" : email,
-        kDebugMode ? "jvcs.mecatronica@gmail.com" : password,
+        kDebugMode ? const String.fromEnvironment('EMAIL_DEBUG') : email,
+        kDebugMode ? const String.fromEnvironment('SENHA_DEBUG') : password,
       );
       state = AsyncData(AuthState(isAuthenticated: true, token: token));
     } catch (e, st) {
