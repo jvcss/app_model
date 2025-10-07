@@ -14,7 +14,7 @@ void main() async {
   printInfo();
   WidgetsFlutterBinding.ensureInitialized();
   await initTranslations(
-    locales: {'pt_BR': 'appends/locales/pt_BR.json'},
+    locales: {'pt_BR': 'locales/pt_BR.json'},
     startLocale: const Locale('pt', 'BR'),
   );
   runApp(const ProviderScope(child: MyApp()));
