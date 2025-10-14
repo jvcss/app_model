@@ -38,8 +38,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     // Prefill for development (remove in production)
     if (kDebugMode) {
-      _emailController.text = 'jvcs.mecatronica@gmail.com';
-      _passwordController.text = 'jvcs.mecatronica@gmail.com';
+      _emailController.text = const String.fromEnvironment("EMAIL") ;
+      _passwordController.text = const String.fromEnvironment("PASSWORD") ;
     }
   }
 

@@ -6,9 +6,19 @@ import '../models/api_response.dart';
 
 /// Serviço de API sem biblioteca externa (Dio)
 class ApiService {
-  static final String baseUrl = kDebugMode
-      ? 'http://localhost:8000/api'
-      : 'https://apisindicancia.growthsolutions.com.br/api';
+  static const baseUrl = kDebugMode
+      // ignore: unnecessary_const
+      ? const String.fromEnvironment(
+          'BACKEND_URL',
+          defaultValue: 'https://dev.jvcss.com.br/api',
+        )
+      : 
+      // ignore: unnecessary_const
+      const String.fromEnvironment(
+          'BACKEND_URL_PROD',
+          defaultValue: 'https://api.jvcss.com.br/api',
+        );
+
 
   static final HttpClient _client = HttpClient();
 
