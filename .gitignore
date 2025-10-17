@@ -45,3 +45,5 @@ app.*.map.json
 /android/app/release
 lib/lib_files.md
 sentry-alerts.yaml
+lib/core/theme/light_theme.dart
+lib/code_files.md

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'core/theme/app_theme.dart';
 import 'helpers/infos.dart' show printInfo;
 import 'routes/app_router.dart';
 import 'services/app_translations.dart';
 import 'services/locale_provider.dart';
+import 'services/theme_service.dart';
 import 'widgets/notifications_overlay.dart';
-import 'providers/theme_provider.dart';
 import 'widgets/theme_widget_fancy_toggle.dart';
 
 void main() async {
@@ -27,28 +28,13 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final locale = ref.watch(localeProvider);
     final router = ref.watch(appRouterProvider);
-    final themeMode = ref.watch(themeModeProvider);
-
-    final light = ThemeData(
-      brightness: Brightness.light,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlueAccent),
-      useMaterial3: true,
-    );
-
-    final dark = ThemeData(
-      brightness: Brightness.dark,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.lightBlueAccent,
-        brightness: Brightness.dark,
-      ),
-      useMaterial3: true,
-    );
+    final themeMode = ref.watch(themeServiceProvider);
 
     return MaterialApp.router(
       locale: locale,
       supportedLocales: const [Locale('pt', 'BR')],
-      theme: light,
-      darkTheme: dark,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       themeMode: themeMode,
       debugShowCheckedModeBanner: false,
       title: 'app_title'.tr,

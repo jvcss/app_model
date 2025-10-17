@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/theme_provider.dart';
+import '../services/theme_service.dart';
 
 /// Widget de toggle de tema no canto superior esquerdo
 /// Expande-se com hover no web e com toque no mobile
@@ -8,15 +8,17 @@ class ThemeCornerToggleOverlay extends ConsumerStatefulWidget {
   const ThemeCornerToggleOverlay({super.key});
 
   @override
-  ConsumerState<ThemeCornerToggleOverlay> createState() => _ThemeCornerToggleOverlayState();
+  ConsumerState<ThemeCornerToggleOverlay> createState() =>
+      _ThemeCornerToggleOverlayState();
 }
 
-class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOverlay>
+class _ThemeCornerToggleOverlayState
+    extends ConsumerState<ThemeCornerToggleOverlay>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _sizeAnimation;
   late Animation<double> _opacityAnimation;
-  
+
   bool _isHovered = false;
   bool _isMobileExpanded = false;
 
@@ -31,18 +33,12 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
     _sizeAnimation = Tween<double>(
       begin: 32.0,
       end: 80.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 
     _opacityAnimation = Tween<double>(
       begin: 0.7,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
   }
 
   @override
@@ -80,7 +76,7 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
   }
 
   void _toggleTheme() {
-    ref.read(themeModeProvider.notifier).toggle();
+    ref.read(themeServiceProvider.notifier).toggle();
   }
 
   bool _isMobile(BuildContext context) {
@@ -92,7 +88,7 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
     // final currentTheme = ref.watch(themeModeProvider);
     final brightness = Theme.of(context).brightness;
     final isMobile = _isMobile(context);
-    
+
     // Determina as cores baseado no tema atual
     final isDark = brightness == Brightness.dark;
     final backgroundColor = isDark ? Colors.white : Colors.black;
@@ -112,7 +108,7 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
             builder: (context, child) {
               final size = _sizeAnimation.value;
               final opacity = _opacityAnimation.value;
-              
+
               return Container(
                 width: size,
                 height: size,
@@ -123,7 +119,7 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
                   ),
                   boxShadow: [
                     BoxShadow(
-                      spreadRadius : 1,
+                      spreadRadius: 1,
                       color: Colors.black.withAlpha((255.0 * 0.2).round()),
                       blurRadius: 98,
                       offset: const Offset(2, 2),
@@ -140,14 +136,18 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
                           child: InkWell(
                             onTap: _toggleTheme,
                             borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(size /  1.2),
+                              bottomRight: Radius.circular(size / 1.2),
                             ),
-                            splashColor: iconColor.withAlpha((255.0 * 0.1).round()),
-                            highlightColor: iconColor.withAlpha((255.0 * 0.05).round()),
+                            splashColor: iconColor.withAlpha(
+                              (255.0 * 0.1).round(),
+                            ),
+                            highlightColor: iconColor.withAlpha(
+                              (255.0 * 0.05).round(),
+                            ),
                           ),
                         ),
                       ),
-                    
+
                     // Ícone centralizado
                     Center(
                       child: AnimatedSwitcher(
@@ -169,7 +169,7 @@ class _ThemeCornerToggleOverlayState extends ConsumerState<ThemeCornerToggleOver
                         ),
                       ),
                     ),
-                    
+
                     // Indicador visual para mobile quando expandido
                     if (isMobile && _isMobileExpanded)
                       Positioned(
