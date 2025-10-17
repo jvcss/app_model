@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 
@@ -41,8 +42,8 @@ class ApiInterceptor extends http.BaseClient {
   }
 
   void _logRequest(http.BaseRequest request, String requestId) {
-    print('🚀 [REQUEST] ${request.method} ${request.url}');
-    print('   Request-ID: $requestId');
+    debugPrint('🚀 [REQUEST] ${request.method} ${request.url}');
+    debugPrint('   Request-ID: $requestId');
   }
 
   void _logResponse(
@@ -51,13 +52,13 @@ class ApiInterceptor extends http.BaseClient {
     Duration duration,
   ) {
     final emoji = response.statusCode < 400 ? '✅' : '❌';
-    print('$emoji [RESPONSE] ${response.statusCode} - ${duration.inMilliseconds}ms');
-    print('   Request-ID: $requestId');
+    debugPrint('$emoji [RESPONSE] ${response.statusCode} - ${duration.inMilliseconds}ms');
+    debugPrint('   Request-ID: $requestId');
     
     // Extrai process time do backend
     final processTime = response.headers['x-process-time'];
     if (processTime != null) {
-      print('   Backend Time: ${processTime}ms');
+      debugPrint('   Backend Time: ${processTime}ms');
     }
   }
 
@@ -67,9 +68,9 @@ class ApiInterceptor extends http.BaseClient {
     Duration duration,
     Object error,
   ) {
-    print('💥 [ERROR] ${request.method} ${request.url}');
-    print('   Request-ID: $requestId');
-    print('   Duration: ${duration.inMilliseconds}ms');
-    print('   Error: $error');
+    debugPrint('💥 [ERROR] ${request.method} ${request.url}');
+    debugPrint('   Request-ID: $requestId');
+    debugPrint('   Duration: ${duration.inMilliseconds}ms');
+    debugPrint('   Error: $error');
   }
 }
