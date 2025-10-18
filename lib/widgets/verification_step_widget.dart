@@ -6,7 +6,7 @@ import 'dart:async';
 
 import '../../../providers/password_reset_provider.dart';
 import '../../../providers/notifications_provider.dart';
-import '../../../services/app_translations.dart';
+import '../services/app_translations.dart';
 
 class VerificationStepWidget extends ConsumerStatefulWidget {
   const VerificationStepWidget({super.key});

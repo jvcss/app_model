@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
 
 import '../../../providers/password_reset_provider.dart';
-import '../../../services/app_translations.dart';
+import '../services/app_translations.dart';
 
 class SuccessStepWidget extends ConsumerStatefulWidget {
   const SuccessStepWidget({super.key});

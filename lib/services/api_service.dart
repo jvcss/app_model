@@ -2,7 +2,7 @@
 //     if (dart.library.io) 'api_service_io.dart'
 //     if (dart.library.html) 'api_service_web.dart';
 import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show kDebugMode, debugPrint;
 import '../models/api_response.dart';
 import 'api_client_interface.dart';
 import 'http_client_impl.dart';
@@ -33,14 +33,14 @@ class ApiService {
   /// Factory que escolhe dart:io para Android e package:http para iOS/Web
   static ApiClient _createClient() {
     if (kDebugMode) {
-      print('🔧 Initializing HTTP Client for: ${Platform.operatingSystem}');
+      debugPrint('🔧 Initializing HTTP Client for: ${Platform.operatingSystem}');
     }
     
     if (Platform.isAndroid) {
-      if (kDebugMode) print('   → Using dart:io HttpClient (Android)');
+      if (kDebugMode) debugPrint('   → Using dart:io HttpClient (Android)');
       return DartHttpClientImpl();
     } else {
-      if (kDebugMode) print('   → Using package:http with ApiInterceptor (iOS/Web)');
+      if (kDebugMode) debugPrint('   → Using package:http with ApiInterceptor (iOS/Web)');
       return PackageHttpClientImpl();
     }
   }

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../providers/password_reset_provider.dart';
 import '../../../providers/notifications_provider.dart';
-import '../../../services/app_translations.dart';
+import '../services/app_translations.dart';
 
 class NewPasswordStepWidget extends ConsumerStatefulWidget {
   const NewPasswordStepWidget({super.key});

@@ -45,11 +45,6 @@ List<Locale> get supportedLocales {
   }).toList();
 }
 
-/// Função para sincronizar com Riverpod Provider
-void syncWithRiverpodLocale(Locale locale) {
-  setTranslationLocale(locale);
-}
-
 /// Função principal de tradução
 String _translate(
   String key, {

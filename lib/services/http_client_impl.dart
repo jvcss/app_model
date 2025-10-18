@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show kDebugMode, debugPrint;
 import '../models/api_response.dart';
 import 'api_client_interface.dart';
 
@@ -35,7 +35,7 @@ class DartHttpClientImpl implements ApiClient {
       });
 
       if (kDebugMode) {
-        print('✅ [dart:io] GET ${response.statusCode} - $endpoint');
+        debugPrint('✅ [dart:io] GET ${response.statusCode} - $endpoint');
       }
 
       return ApiResponse(
@@ -44,7 +44,7 @@ class DartHttpClientImpl implements ApiClient {
         headers: responseHeaders,
       );
     } catch (e) {
-      if (kDebugMode) print('❌ [dart:io] GET Error: $e');
+      if (kDebugMode) debugPrint('❌ [dart:io] GET Error: $e');
       rethrow;
     }
   }
@@ -72,7 +72,7 @@ class DartHttpClientImpl implements ApiClient {
       final status = response.statusCode;
 
       if (status < 200 || status >= 300) {
-        if (kDebugMode) print('❌ [dart:io] POST $status: $responseBody');
+        if (kDebugMode) debugPrint('❌ [dart:io] POST $status: $responseBody');
         throw Exception('HTTP $status: $responseBody');
       }
 
@@ -89,7 +89,7 @@ class DartHttpClientImpl implements ApiClient {
       });
 
       if (kDebugMode) {
-        print('✅ [dart:io] POST $status - $endpoint');
+        debugPrint('✅ [dart:io] POST $status - $endpoint');
       }
 
       return ApiResponse(
@@ -98,7 +98,7 @@ class DartHttpClientImpl implements ApiClient {
         headers: responseHeaders,
       );
     } catch (e) {
-      if (kDebugMode) print('❌ [dart:io] POST Error: $e');
+      if (kDebugMode) debugPrint('❌ [dart:io] POST Error: $e');
       rethrow;
     }
   }

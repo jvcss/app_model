@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show kDebugMode, debugPrint;
 import '../models/api_response.dart';
 import 'api_client_interface.dart';
 import 'api_interceptor.dart';
@@ -18,7 +18,7 @@ class PackageHttpClientImpl implements ApiClient {
       final response = await _client.get(url, headers: headers);
       return _processResponse(response);
     } catch (e) {
-      if (kDebugMode) print('❌ [package:http] GET Error: $e');
+      if (kDebugMode) debugPrint('❌ [package:http] GET Error: $e');
       rethrow;
     }
   }
@@ -39,8 +39,8 @@ class PackageHttpClientImpl implements ApiClient {
         final requestId = response.headers['x-request-id'] ?? 'unknown';
         
         if (kDebugMode) {
-          print('❌ [package:http] POST ${response.statusCode} - ${response.body}');
-          print('   Request-ID: $requestId');
+          debugPrint('❌ [package:http] POST ${response.statusCode} - ${response.body}');
+          debugPrint('   Request-ID: $requestId');
         }
         
         throw ApiException(
@@ -53,7 +53,7 @@ class PackageHttpClientImpl implements ApiClient {
 
       return _processResponse(response);
     } catch (e) {
-      if (kDebugMode) print('❌ [package:http] POST Exception: $e');
+      if (kDebugMode) debugPrint('❌ [package:http] POST Exception: $e');
       rethrow;
     }
   }
